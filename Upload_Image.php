@@ -167,7 +167,6 @@ class Upload_Image
    */
   public function upload()
   {
-    dump($this);
     if (empty($this->get_image_errors())) {
       return move_uploaded_file($this->image['tmp_name'], "{$this->uploaded_dir}/{$this->image_name}.{$this->image_extension}");
     } else {
