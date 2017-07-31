@@ -1,0 +1,4 @@
+AuthUserFile "/services/users/zstorage19p1/sakarioka/www/sakarioka_website/sakarioka.cms-blog/.htaclu"
+AuthName Members
+AuthType Basic
+Require valid-user
