@@ -8,7 +8,13 @@ class InputForm
 
   public function __construct()
   {
-    
+    if (!empty($_GET)) {
+      $this->params = array_merge($this->params, $_GET);
+    }
+
+    if (!empty($_POST)) {
+      $this->params = array_merge($this->params, $_POST);
+    }
   }
 
   public function validate($column_name, $condition)
@@ -18,17 +24,13 @@ class InputForm
     if (count($condition) != 2 && !in_array($this->available_condition)) {
       trigger_error('Validate condition not valid.', E_USER_ERROR);
     } else {
-      if (isset($_GET[$column_name])) {
-        $value = $_GET[$column_name];
-      } elseif (isset($_POST[$column_name])) {
-        $value = $_POST[$column_name];
-      } else {
+      if (!isset($this->params[$column_name])) {
         trigger_error('Column name not valid.', E_USER_ERROR);
       }
 
-      if ($condition[0] == 'min' && $value < $condition[1]) {
+      if ($condition[0] === 'min' && $value < $condition[1]) {
         $this->set_errors('Minimum length of '.ucwords($column_name).' is '.$condition[1].' characters.', $column_name);
-      } elseif ($condition[0] == 'max' && $value > $condition[1]) {
+      } elseif ($condition[0] === 'max' && $value > $condition[1]) {
         $this->set_errors('Maximum length of '.ucwords($column_name).' is '.$condition[1].' characters.', $column_name);
       }
     }
@@ -78,5 +80,4 @@ class InputForm
     $this->error_template[0] = $first;
     $this->error_template[1] = $second;
   }
-
 }

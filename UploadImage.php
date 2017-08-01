@@ -8,7 +8,7 @@
  *
  */
 
-class Upload_Image
+class UploadImage
 {
   protected $uploaded_dir      = null;
   protected $image             = null;
