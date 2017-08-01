@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  #RewriteCond %{HTTPS} off 
+  #RewriteCond %{HTTP_HOST} ^sakarioka\.com [NC]
+  #RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+
+  #RewriteCond %{HTTP_HOST} ^sakarioka\.com$ [NC]
+  #RewriteRule ^(.*)$ https://www.sakarioka.com/$1 [R=301,L]
+  #RewriteCond %{THE_REQUEST} ^.*/index.php
+  #RewriteRule ^(.*)index.php$ https://www.sakarioka.com/$1 [R=301,L]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule !\.(js|ico|gif|jpg|png|bmp|swf|css|html)$ index.php [QSA,L]
+</IfModule>
+
