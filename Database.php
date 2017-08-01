@@ -68,12 +68,12 @@ class Database
 
   public function commit()
   {
-    return mysqli_commit($this->conn)
+    return mysqli_commit($this->conn);
   }
 
   public function rollback()
   {
-    return mysqli_rollback($this->conn)
+    return mysqli_rollback($this->conn);
   }
 
   public function close()
