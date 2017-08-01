@@ -7,10 +7,10 @@ define('DB_NAME',     'sakarioka_blog');
 
 define('PROJECT_ROOT', $_SERVER['DOCUMENT_ROOT']);
 
-include('function.php');
-include('Database.php');
-include('InputForm.php');
+require('function.php');
+require('InputForm.php');
+require('Database.php');
 
 if (!empty($_FILES)) {
-  include('UploadImage.php');
+  require('UploadImage.php');
 }

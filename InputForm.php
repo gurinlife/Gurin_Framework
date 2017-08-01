@@ -41,6 +41,26 @@ class InputForm
     $this->errors[$key] = $error_message;
   }
 
+  public function set_param($key, $value)
+  {
+    $this->params[$key] = $value;
+  }
+
+  public function set_params($data)
+  {
+    $this->params = array_merge($this->params, $data);
+  }
+
+  public function get_param($key)
+  {
+    return $this->params[$key];
+  }
+
+  public function get_params()
+  {
+    return $this->params;
+  }
+
   public function get_errors()
   {
     return $this->errors;
