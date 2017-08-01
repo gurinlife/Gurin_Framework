@@ -2,5 +2,25 @@
 
 include('init.php');
 
-$current_url = (isset($_SERVER['HTTPS'])) ? 'https' : 'http'.'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-$path        = explode('/', trim(parse_url($current_url, PHP_URL_PATH), '/'));
+$path = explode('/', trim(parse_url(CURRENT_URL, PHP_URL_PATH), '/'));
+
+if (isset($path[0])) {
+  $controller = $path[0];
+} else {
+  $controller = DEFAULT_CONTROLLER;
+}
+
+if (isset($path[1])) {
+  $method = $path[1];
+} else {
+  $method = DEFAULT_METHOD;
+}
+
+if (count($path) > 2) {
+  $option = array();
+  
+  for ($i = 2; $i < count($path); $i++) {
+    $option[] = $path[$i];
+  }
+}
+
