@@ -6,22 +6,23 @@
     <div class="form-group">
       <label>Image</label>
       <input type="file" name="image">
+      <?php echo $errors['title'] ?>
     </div>
     <div class="form-group <?php if ($m_blog->has_error('title')) echo 'has-error' ?>">
       <label>Title</label>
       <input type="text" name="title" class="form-control">
-      <?php echo $m_blog->show_error('title') ?>
+      <?php echo $errors['title'] ?>
     </div>
     <div class="form-group <?php if ($m_blog->has_error('description')) echo 'has-error' ?>">
       <label>Description</label>
       <textarea name="description" class="form-control"></textarea>
-      <?php echo $m_blog->show_error('description') ?>
+      <?php echo $errors['image'] ?>
     </div>
     <div class="form-group <?php if ($m_blog->has_error('tags')) echo 'has-error' ?>">
       <label>Tags</label>
       <span class="small">(Optional)</span>
       <input type="text" name="tag" class="form-control">
-      <?php echo $m_blog->show_error('tags') ?>
+      <?php echo $errors['tag'] ?>
     </div>
     <div class="clearfix">
       <a href="http://cms-blog.sakarioka.com" class="btn btn-default pull-left">Cancel</a>

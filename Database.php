@@ -2,13 +2,11 @@
 
 class Database
 {
-  protected $conn           = null;
-  protected $table_name     = null;
-  protected $query          = null;
-  protected $errors         = array();
-  protected $error_template = array('', '');
-  protected $auto_commit    = true;
-
+  protected $conn        = null;
+  protected $table_name  = null;
+  protected $query       = null;
+  protected $auto_commit = true;
+  
   public function __construct($table_name, $auto_commit = true)
   {
     $this->conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -53,61 +51,6 @@ class Database
     return $this->run_query();
   }
 
-  public function validate($column_name, $condition)
-  {
-    $condition = explode('_', $condition);
-
-    if (count($condition) != 2 && !in_array($this->available_condition)) {
-      trigger_error('Validate condition not valid.', E_USER_ERROR);
-    } else {
-      if (isset($_GET[$column_name])) {
-        $value = $_GET[$column_name];
-      } elseif (isset($_POST[$column_name])) {
-        $value = $_POST[$column_name];
-      } else {
-        trigger_error('Column name not valid.', E_USER_ERROR);
-      }
-
-      if ($condition[0] == 'min' && $value < $condition[1]) {
-        $this->set_errors('Minimum length of '.ucwords($column_name).' is '.$condition[1].' characters.', $column_name);
-      } elseif ($condition[0] == 'max' && $value > $condition[1]) {
-        $this->set_errors('Maximum length of '.ucwords($column_name).' is '.$condition[1].' characters.', $column_name);
-      }
-    }
-  }
-
-  public function set_errors($error_message, $key)
-  {
-    $this->errors[$key] = $error_message;
-  }
-
-  public function get_errors()
-  {
-    return $this->errors;
-  }
-
-  public function has_errors()
-  {
-    return (!empty($this->errors));
-  }
-
-  public function has_error($column_name) {
-    return (!empty($this->errors[$column_name]));
-  }
-
-  public function show_error($column_name)
-  {
-    if (isset($this->errors[$column_name])) {
-      return $this->error_template[0].' '.trim($this->errors[$column_name]).' '.$this->error_template[1];
-    }
-  }
-
-  public function set_error_template($first, $second = '')
-  {
-    $this->error_template[0] = $first;
-    $this->error_template[1] = $second;
-  }
-
   public function set_query($query)
   {
     $this->query = $query;
@@ -127,7 +70,7 @@ class Database
   {
     return mysqli_commit($this->conn)
   }
-  
+
   public function rollback()
   {
     return mysqli_rollback($this->conn)

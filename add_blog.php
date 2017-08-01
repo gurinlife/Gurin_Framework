@@ -7,12 +7,14 @@ $tags  = $m_tag->select('*', "is_deleted = '0' ORDER BY name ASC");
 
 if ($_POST) {
   $m_blog = new Database('blog', false);
+
   $m_blog->validate('title', 'min_3');
   $m_blog->validate('title', 'max_100');
   $m_blog->validate('description', 'min_10');
   $m_blog->validate('description', 'max_10000');
 
   $m_blog->set_error_template('<i class="text-danger small">', '</i>');
+  $errors = $m_blog->get_errors_with_template();
 
   if (!$m_blog->has_errors()) {
     $c_image = new Upload_Image($_FILES['image']);
@@ -39,4 +41,4 @@ if ($_POST) {
   }
 }
 
-get_view('add_blog', compact('m_blog', 'tags'));
+get_view('add_blog', compact('m_blog', 'tags', 'errors'));
