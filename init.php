@@ -1,5 +1,10 @@
 <?php
 
+define('DB_HOST',     'localhost');
+define('DB_USER',     'sakarioka_blog');
+define('DB_PASSWORD', 's4k4r10k4!@');
+define('DB_NAME',     'sakarioka_blog');
+
 include('Database.php');
 include('function.php');
 
